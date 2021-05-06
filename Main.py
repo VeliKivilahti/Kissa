@@ -63,15 +63,21 @@ lbl_name = ttk.Label(frm_main, text="Nimi\nKoulu", font=30)
 btn_profile = ttk.Button(frm_main, width=10, text="Profile")
 lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=30)
 lst_laksyt = tk.Listbox(frm_main)
-list_items = ["matematiikka","englanti","historia","äidinkieli"]
+list_items = ["matematiikka","englanti","historia","äidinkieli",1,2,3,4,5,6,7,8]
 for item in list_items:
     lst_laksyt.insert("end",item)
 
 
+btn_scrollup =ttk.Button(frm_main,text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
+btn_scrolldown =ttk.Button(frm_main,text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
+
+
 lbl_name.grid(row=0,column=0,padx=10)
-btn_profile.grid(row=0, column=3, padx=100)
-lbl_laksyt.grid(row=1,column=1,pady=50)
+btn_profile.grid(row=0, column=3,sticky="NE")
+lbl_laksyt.grid(row=1,column=1,sticky="SW")
 lst_laksyt.grid(row=2,column=1)
+btn_scrollup.grid(row=2,column=2,sticky="N")
+btn_scrolldown.grid(row=2,column=2,sticky="S")
 
 frm_login.pack()
 
