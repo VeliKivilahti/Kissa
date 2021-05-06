@@ -2,15 +2,22 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from PIL import ImageTk, Image
 
+email = "sahkoposti"
+password = "salasana"
+
 def loginToGreeting():
-    frm_login.pack_forget()
-    frm_greeting.pack()
+    email = ent_email.get()
+    password = ent_pw.get()
+    if email == "oppilas@email.com" and password == "salaisuus":
+        lbl_error.grid_forget()
+        frm_login.pack_forget()
+        frm_greeting.pack()
+    else:
+        lbl_error.grid(row=7, column=0)
 
 def greetingToLogin():
     frm_greeting.pack_forget()
     frm_login.pack()
-    #asdasdasd
-    #Testi2
 
 def geetingToMain():
     frm_greeting.pack_forget()
@@ -25,17 +32,18 @@ root.wm_geometry("360x640")
 frm_login = ttk.Frame(root)
 lbl_cat = ttk.Label(frm_login, text="😺", font=("Courier",200))
 lbl_email = ttk.Label(frm_login, text="Sähköposti")
-ent_email = ttk.Entry(frm_login, width=30)
+ent_email = ttk.Entry(frm_login, textvariable=email, width=30)
 frm_empty = ttk.Frame(frm_login, height=20)
 lbl_pw = ttk.Label(frm_login, text="Salasana")
-ent_pw = ttk.Entry(frm_login, show="*", width=30)
+ent_pw = ttk.Entry(frm_login, textvariable=password, show="*", width=30)
 btn_ok = ttk.Button(frm_login, width=10, text="Ok", command=loginToGreeting)
+lbl_error = ttk.Label(frm_login, text="Sähköposti tai salasana on väärin.", foreground="red")
 
 lbl_cat.grid(row=0, column=0)
-lbl_email.grid(row=1, column=0)
+lbl_email.grid(row=1, column=0, padx=50, sticky="w")
 ent_email.grid(row=2, column=0)
 frm_empty.grid(row=3, column=0)
-lbl_pw.grid(row=4, column=0)
+lbl_pw.grid(row=4, column=0, padx=50, sticky="w")
 ent_pw.grid(row=5, column=0)
 btn_ok.grid(row=6, column=0, pady=20)
 
