@@ -10,6 +10,7 @@ def greetingToLogin():
     frm_greeting.pack_forget()
     frm_login.pack()
     #asdasdasd
+    #Testi2
 
 def geetingToMain():
     frm_greeting.pack_forget()
