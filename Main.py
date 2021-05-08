@@ -24,8 +24,8 @@ def geetingToMain():
 
 def labelChange(studentName):
     print(studentName)
-    lbl_speachBubble.configure(text=studentName.split('@')[0])
-    lbl_name.configure(text="koulu\n"+studentName.split('@')[0])
+    lbl_speachBubble.configure(text="Hei " + studentName.split('@')[0] + "!")
+    lbl_name.configure(text=studentName.split('@')[0] + "\nKoulu")
 
 #Init Tkinter
 root = tk.Tk()
@@ -73,33 +73,37 @@ btn_ok.grid(row=0, column=1, padx=5)
 #Start page
 frm_main = ttk.Frame(root)
 lbl_name = ttk.Label(frm_main, text="Nimi\nKoulu", font=30)
-btn_profile = ttk.Button(frm_main, width=10, text="Profile")
+btn_profile = ttk.Button(frm_main, text="Profile")
 lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=30)
-lst_laksyt = tk.Listbox(frm_main)
-list_items = ["matematiikka","englanti","historia","äidinkieli",1,2,3,4,5,6,7,8]
+lst_laksyt = tk.Listbox(frm_main, font=30)
+list_items = ["Matematiikka","Englanti","Historia","Äidinkieli","Kuvataide","Uskonto","Maantieto","Biologia","Fysiikka","Kemia","Ruotsi","Liikunta"]
 for item in list_items:
-    lst_laksyt.insert("end",item)
-btn_scrollup =ttk.Button(frm_main,text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
-btn_scrolldown =ttk.Button(frm_main,text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
+    lst_laksyt.insert("end", item)
+btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
+btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
 
-mailImage= tk.PhotoImage(file="pictures/mail.png")
-btn_mail= tk.Button(frm_main,image=mailImage,highlightthickness = 0, bd = 0)
-scheduleImage =tk.PhotoImage(file="pictures/schedule.png")
-btn_schedule= tk.Button(frm_main,image=scheduleImage,highlightthickness = 0, bd = 0)
-noteImage =tk.PhotoImage(file="pictures/notes.png")
-btn_note= tk.Button(frm_main,image=noteImage,highlightthickness = 0, bd = 0)
+frm_buttons = ttk.Frame(frm_main)
+frm_buttons.columnconfigure(0, weight=1)
+frm_buttons.columnconfigure(1, weight=1)
+frm_buttons.columnconfigure(2, weight=1)
+img_mail= tk.PhotoImage(file="pictures/mail.png")
+btn_mail= tk.Button(frm_buttons,image=img_mail,highlightthickness = 0, bd = 0)
+img_schedule =tk.PhotoImage(file="pictures/schedule.png")
+btn_schedule= tk.Button(frm_buttons,image=img_schedule,highlightthickness = 0, bd = 0)
+img_note =tk.PhotoImage(file="pictures/note.png")
+btn_note= tk.Button(frm_buttons,image=img_note,highlightthickness = 0, bd = 0)
 
+lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
+btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
+lbl_laksyt.grid(row=2,column=0,sticky="SW")
+lst_laksyt.grid(row=3,column=0,ipadx=20)
+btn_scrollup.grid(row=3,column=1,sticky="N")
+btn_scrolldown.grid(row=3,column=1,sticky="S")
 
-
-lbl_name.grid(row=0,column=0,sticky="NE")
-btn_profile.grid(row=0, column=1,sticky="NE")
-lbl_laksyt.grid(row=1,column=0,sticky="SW")
-lst_laksyt.grid(row=2,column=0,ipadx=20)
-btn_scrollup.grid(row=2,column=1,sticky="N")
-btn_scrolldown.grid(row=2,column=1,sticky="S")
-btn_mail.grid(row=3,column=0,sticky="W")
-btn_schedule.grid(row=3,column=0,sticky="E")
-btn_note.grid(row=3,column=1,sticky="W")
+frm_buttons.grid(row=4, column=0, columnspan=2, pady=25, sticky="EW")
+btn_mail.grid(row=0,column=0, sticky="W")
+btn_schedule.grid(row=0,column=1)
+btn_note.grid(row=0,column=2, sticky="E")
 
 frm_login.pack()
 
