@@ -85,7 +85,7 @@ for item in list_items:
     lst_laksyt.insert("end", item)
 btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
-lst_laksyt.bind("<Double-Button-1>", mainToHomework)
+lst_laksyt.bind("<Button-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
