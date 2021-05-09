@@ -18,14 +18,18 @@ def greetingToLogin():
     frm_greeting.pack_forget()
     frm_login.pack()
 
-def geetingToMain():
+def greetingToMain():
     frm_greeting.pack_forget()
     frm_main.pack()
 
+def mainToHomework(*args):
+    frm_main.pack_forget()
+    frm_homework.pack()
+
 def labelChange(studentName):
-    print(studentName)
     lbl_speachBubble.configure(text="Hei " + studentName.split('@')[0] + "!")
     lbl_name.configure(text=studentName.split('@')[0] + "\nKoulu")
+
 
 #Init Tkinter
 root = tk.Tk()
@@ -56,15 +60,15 @@ frm_greeting = ttk.Frame(root)
 img_speachBubble = tk.PhotoImage(file="pictures/speachBubble.png")
 lbl_speachBubble = ttk.Label(frm_greeting, text=email, font=25, image=img_speachBubble, compound='center')
 lbl_cat = ttk.Label(frm_greeting, text="😺", font=("Courier",200))
-lbl_geeting = ttk.Label(frm_greeting, text="Sinulla on 0 uutta läksyä")
+lbl_greeting = ttk.Label(frm_greeting, text="Sinulla on 0 uutta läksyä")
 
 frm_buttons = ttk.Frame(frm_greeting)
 btn_back = ttk.Button(frm_buttons, width=10, text="Takaisin", command=greetingToLogin)
-btn_ok = ttk.Button(frm_buttons, width=10, text="Ok", command=geetingToMain)
+btn_ok = ttk.Button(frm_buttons, width=10, text="Ok", command=greetingToMain)
 
 lbl_speachBubble.grid(row=0, column=0)
 lbl_cat.grid(row=1, column=0)
-lbl_geeting.grid(row=2, column=0)
+lbl_greeting.grid(row=2, column=0)
 
 frm_buttons.grid(row=3, column=0, pady=20)
 btn_back.grid(row=0, column=0, padx=5)
@@ -81,6 +85,7 @@ for item in list_items:
     lst_laksyt.insert("end", item)
 btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
+lst_laksyt.bind("<Double-Button-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
@@ -105,6 +110,44 @@ btn_mail.grid(row=0,column=0, sticky="W")
 btn_schedule.grid(row=0,column=1)
 btn_note.grid(row=0,column=2, sticky="E")
 
+## Homework Page
+
+frm_homework = ttk.Frame(root)
+lbl_name = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
+btn_profile = ttk.Button(frm_homework, text="Profile")
+lbl_ainelaksyt = ttk.Label(frm_homework, text="LÄKSYT\nAINE", font=30)
+lst_ainelaksyt = tk.Listbox(frm_homework, font=30)
+list_homework = ["Laksy1","Laksy2","Laksy3","Laksy4","Laksy5","Laksy6","Laksy7"]
+for item in list_homework:
+    lst_ainelaksyt.insert("end", item)
+btn_scrollup =ttk.Button(frm_homework, text="^",command=lambda:lst_ainelaksyt.yview_scroll(-1,"units"))
+btn_scrolldown =ttk.Button(frm_homework, text="ˇ",command=lambda:lst_ainelaksyt.yview_scroll(1,"units"))
+
+#frm_buttons = ttk.Frame(frm_homework)
+#frm_buttons.columnconfigure(0, weight=1)
+#frm_buttons.columnconfigure(1, weight=1)
+#frm_buttons.columnconfigure(2, weight=1)
+#img_mail= tk.PhotoImage(file="pictures/mail.png")
+#btn_mail= tk.Button(frm_buttons,image=img_mail,highlightthickness = 0, bd = 0)
+#img_schedule =tk.PhotoImage(file="pictures/schedule.png")
+#btn_schedule= tk.Button(frm_buttons,image=img_schedule,highlightthickness = 0, bd = 0)
+#img_note =tk.PhotoImage(file="pictures/note.png")
+#btn_note= tk.Button(frm_buttons,image=img_note,highlightthickness = 0, bd = 0)
+
+lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
+btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
+lbl_laksyt.grid(row=2,column=0,sticky="SW")
+lst_ainelaksyt.grid(row=3,column=0,ipadx=20)
+btn_scrollup.grid(row=3,column=1,sticky="N")
+btn_scrolldown.grid(row=3,column=1,sticky="S")
+
+#frm_buttons.grid(row=4, column=0, columnspan=2, pady=25, sticky="EW")
+#btn_mail.grid(row=0,column=0, sticky="W")
+#btn_schedule.grid(row=0,column=1)
+#btn_note.grid(row=0,column=2, sticky="E")
+
+
+# Pack the Login page and start
 frm_login.pack()
 
 root.mainloop()
