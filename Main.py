@@ -27,9 +27,27 @@ def mainToHomework(*args):
     frm_main.pack_forget()
     frm_homework.pack()
 
+def mainToProfile():
+    frm_main.pack_forget()
+    frm_profile.pack()
+
+def homeworkToProfile():
+    frm_homework.pack_forget()
+    frm_profile.pack()
+
+def homeworkToMain():
+    frm_homework.pack_forget()
+    frm_main.pack()
+
+def profileToMain():
+    frm_profile.pack_forget()
+    frm_main.pack()
+
 def labelChange(studentName):
     lbl_speachBubble.configure(text="Hei " + studentName.split('@')[0] + "!")
     lbl_name.configure(text=studentName.split('@')[0] + "\nKoulu")
+    lbl_nameHomework.configure(text=studentName.split('@')[0] + "\nKoulu")
+    lbl_nameProfile.configure(text=studentName.split('@')[0] + "\nKoulu")
 
 
 #Init Tkinter
@@ -77,8 +95,8 @@ btn_ok.grid(row=0, column=1, padx=5)
 
 #Start page
 frm_main = ttk.Frame(root)
-lbl_name = ttk.Label(frm_main, text="Nimi\nKoulu", font=30)
-btn_profile = ttk.Button(frm_main, text="Profile")
+lbl_name = ttk.Label(frm_main,text="Nimi\nKoulu", font=30)
+btn_profile = ttk.Button(frm_main, text="Profile",command=mainToProfile)
 lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=30)
 lst_laksyt = tk.Listbox(frm_main, font=30)
 list_items = ["Matematiikka","Englanti","Historia","Äidinkieli","Kuvataide","Uskonto","Maantieto","Biologia","Fysiikka","Kemia","Ruotsi","Liikunta"]
@@ -126,8 +144,8 @@ def openFile():
 
     
 frm_homework = ttk.Frame(root)
-lbl_name = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
-btn_profile = ttk.Button(frm_homework, text="Profile")
+lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
+btn_profile = ttk.Button(frm_homework, text="Profile",command=homeworkToProfile)
 lbl_ainelaksyt = ttk.Label(frm_homework, text="LÄKSYT\nAINE", font=30)
 txt_ainelaksyt = tk.Text(frm_homework,width=20)
 btn_scrollup =ttk.Button(frm_homework, text="^",command=lambda:txt_ainelaksyt.yview_scroll(-1,"units"))
@@ -137,8 +155,9 @@ btn_palautus = ttk.Button(frm_homework, text="palautus", command=changeButton)
 btn_file = ttk.Button (frm_homework, text="file",command=openFile)
 btn_camera = ttk.Button (frm_homework, text="camera")
 lbl_palautettu = ttk.Label(frm_homework,text = "✓ palautettu",background="green",font=30)
+btn_returnToMain = ttk.Button(frm_homework,text= "back", command=homeworkToMain)
 
-lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
+lbl_nameHomework.grid(row=0,column=0,sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
 lbl_laksyt.grid(row=2,column=0,sticky="SW")
 txt_ainelaksyt.grid(row=3,column=0,ipadx=20)
@@ -146,7 +165,32 @@ btn_scrollup.grid(row=3,column=1,sticky="N")
 btn_scrolldown.grid(row=3,column=1,sticky="S")
 lbl_palautus.grid(row=4) 
 btn_palautus.grid(row=5)
+btn_returnToMain.grid(row=6,sticky="SW")
 
+
+## Profile Page
+frm_profile = ttk.Frame(root)
+lbl_nameProfile = ttk.Label(frm_profile, text="Nimi\nKoulu", font=30)
+btn_profile = ttk.Button(frm_profile, text="Profile")
+lbl_omatTiedot= ttk.Label(frm_profile, text="OMAT TIEDOT", font =40)
+lbl_tiedot = ttk.Label(frm_profile,text="Opettaja\nPuhelinnumero\nHuoltaja", font=30)
+btn_kuva = ttk.Button(frm_profile,image=img_schedule)
+btn_kuva1 = ttk.Button(frm_profile,text="Sposti")
+btn_kuva2 = ttk.Button(frm_profile,text="Vaihda salasana")
+btn_kuva3 = ttk.Button(frm_profile,text="Kirjaudu ulos")
+btn_asetukset = ttk.Button(frm_profile,text="Asetukset")
+btn_returnToMain = ttk.Button(frm_profile,text="Back", command=profileToMain)
+
+lbl_nameProfile.grid(row=0,column=0,sticky="NW", pady=20)
+btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
+lbl_omatTiedot.grid(row=1)
+btn_kuva.grid(row=2,column=0)
+btn_kuva1.grid(row=2, column=1,sticky="N")
+btn_kuva2.grid(row=2,column=1,sticky="S")
+btn_kuva3.grid(row=3)
+lbl_tiedot.grid(row=4)
+btn_asetukset.grid(row=5)
+btn_returnToMain.grid(row=6)
 
 # Pack the Login page and start
 frm_login.pack()
