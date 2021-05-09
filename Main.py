@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from tkinter import filedialog
 email = "sahkoposti"
 password = "salasana"
 
@@ -85,7 +86,7 @@ for item in list_items:
     lst_laksyt.insert("end", item)
 btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
-lst_laksyt.bind("<Double-Button-1>", mainToHomework)
+lst_laksyt.bind("<Button-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
@@ -112,39 +113,39 @@ btn_note.grid(row=0,column=2, sticky="E")
 
 ## Homework Page
 
+def changeButton():
+    btn_palautus.grid_forget()
+    btn_file.grid(row=5,column=0, sticky="W")
+    btn_camera.grid(row=5,column=0, sticky="E")
+
+def openFile():
+    filename = filedialog.askopenfilename()
+    btn_file.grid_forget()
+    btn_camera.grid_forget()
+    lbl_palautettu.grid(row=5)
+
+    
 frm_homework = ttk.Frame(root)
 lbl_name = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
 btn_profile = ttk.Button(frm_homework, text="Profile")
 lbl_ainelaksyt = ttk.Label(frm_homework, text="LÄKSYT\nAINE", font=30)
-lst_ainelaksyt = tk.Listbox(frm_homework, font=30)
-list_homework = ["Laksy1","Laksy2","Laksy3","Laksy4","Laksy5","Laksy6","Laksy7"]
-for item in list_homework:
-    lst_ainelaksyt.insert("end", item)
-btn_scrollup =ttk.Button(frm_homework, text="^",command=lambda:lst_ainelaksyt.yview_scroll(-1,"units"))
-btn_scrolldown =ttk.Button(frm_homework, text="ˇ",command=lambda:lst_ainelaksyt.yview_scroll(1,"units"))
-
-#frm_buttons = ttk.Frame(frm_homework)
-#frm_buttons.columnconfigure(0, weight=1)
-#frm_buttons.columnconfigure(1, weight=1)
-#frm_buttons.columnconfigure(2, weight=1)
-#img_mail= tk.PhotoImage(file="pictures/mail.png")
-#btn_mail= tk.Button(frm_buttons,image=img_mail,highlightthickness = 0, bd = 0)
-#img_schedule =tk.PhotoImage(file="pictures/schedule.png")
-#btn_schedule= tk.Button(frm_buttons,image=img_schedule,highlightthickness = 0, bd = 0)
-#img_note =tk.PhotoImage(file="pictures/note.png")
-#btn_note= tk.Button(frm_buttons,image=img_note,highlightthickness = 0, bd = 0)
+txt_ainelaksyt = tk.Text(frm_homework,width=20)
+btn_scrollup =ttk.Button(frm_homework, text="^",command=lambda:txt_ainelaksyt.yview_scroll(-1,"units"))
+btn_scrolldown =ttk.Button(frm_homework, text="ˇ",command=lambda:txt_ainelaksyt.yview_scroll(1,"units"))
+lbl_palautus = ttk.Label(frm_homework,text="Palauta viim. 1.4", font=30)
+btn_palautus = ttk.Button(frm_homework, text="palautus", command=changeButton)
+btn_file = ttk.Button (frm_homework, text="file",command=openFile)
+btn_camera = ttk.Button (frm_homework, text="camera")
+lbl_palautettu = ttk.Label(frm_homework,text = "✓ palautettu",background="green",font=30)
 
 lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
 lbl_laksyt.grid(row=2,column=0,sticky="SW")
-lst_ainelaksyt.grid(row=3,column=0,ipadx=20)
+txt_ainelaksyt.grid(row=3,column=0,ipadx=20)
 btn_scrollup.grid(row=3,column=1,sticky="N")
 btn_scrolldown.grid(row=3,column=1,sticky="S")
-
-#frm_buttons.grid(row=4, column=0, columnspan=2, pady=25, sticky="EW")
-#btn_mail.grid(row=0,column=0, sticky="W")
-#btn_schedule.grid(row=0,column=1)
-#btn_note.grid(row=0,column=2, sticky="E")
+lbl_palautus.grid(row=4) 
+btn_palautus.grid(row=5)
 
 
 # Pack the Login page and start
