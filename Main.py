@@ -85,7 +85,7 @@ for item in list_items:
     lst_laksyt.insert("end", item)
 btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
-lst_laksyt.bind("<Button-1>", mainToHomework)
+lst_laksyt.bind("<Double-Button-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
@@ -113,10 +113,10 @@ btn_note.grid(row=0,column=2, sticky="E")
 ## Homework Page
 
 frm_homework = ttk.Frame(root)
-lbl_name1 = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
+lbl_name = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
 btn_profile = ttk.Button(frm_homework, text="Profile")
 lbl_ainelaksyt = ttk.Label(frm_homework, text="LÄKSYT\nAINE", font=30)
-lst_ainelaksyt = tk.Listbox(frm_homework, font=100)
+lst_ainelaksyt = tk.Listbox(frm_homework, font=30)
 list_homework = ["Laksy1","Laksy2","Laksy3","Laksy4","Laksy5","Laksy6","Laksy7"]
 for item in list_homework:
     lst_ainelaksyt.insert("end", item)
@@ -134,7 +134,7 @@ btn_scrolldown =ttk.Button(frm_homework, text="ˇ",command=lambda:lst_ainelaksyt
 #img_note =tk.PhotoImage(file="pictures/note.png")
 #btn_note= tk.Button(frm_buttons,image=img_note,highlightthickness = 0, bd = 0)
 
-lbl_name1.grid(row=0,column=0,sticky="NW", pady=20)
+lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
 lbl_laksyt.grid(row=2,column=0,sticky="SW")
 lst_ainelaksyt.grid(row=3,column=0,ipadx=20)
