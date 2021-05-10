@@ -7,7 +7,7 @@ password = "salasana"
 def loginToGreeting():
     email = ent_email.get()
     password = ent_pw.get()
-    if email == "asd@email.com" and password == "asd":
+    if email == "A" and password == "A":
         lbl_error.grid_forget()
         frm_login.pack_forget()
         labelChange(email)
@@ -95,15 +95,18 @@ btn_ok.grid(row=0, column=1, padx=5)
 
 #Start page
 frm_main = ttk.Frame(root)
-lbl_name = ttk.Label(frm_main,text="Nimi\nKoulu", font=30)
-btn_profile = ttk.Button(frm_main, text="Profile",command=mainToProfile)
-lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=30)
-lst_laksyt = tk.Listbox(frm_main, font=30)
-list_items = ["Matematiikka","Englanti","Historia","Äidinkieli","Kuvataide","Uskonto","Maantieto","Biologia","Fysiikka","Kemia","Ruotsi","Liikunta"]
+lbl_name = ttk.Label(frm_main,text="Nimi\nKoulu", font=('Tahoma', 25))
+img_profile = tk.PhotoImage(file="pictures/profile.png")
+btn_profile = tk.Button(frm_main, image=img_profile, highlightthickness=0, bd=0, command=mainToProfile)
+lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=('Tahoma', 25))
+lst_laksyt = tk.Listbox(frm_main, height=8, width=16, font=('Tahoma', 20))
+list_items = ["Matematiikka 1","Matematiikka 2","Matematiikka 3","Englanti 1","Englanti 2","Historia 1","Historia 2","Äidinkieli 1","Äidinkieli 2","Äidinkieli 3","Äidinkieli 4","Kuvataide 1","Kuvataide 2","Uskonto 1","Uskonto 2","Maantieto 1","Maantieto 2","Biologia 1","Biologia 2","Fysiikka 1","Fysiikka 2","Kemia 1","Kemia 2","Ruotsi 1","Ruotsi 2","Ruotsi 3","Liikunta 1"]
 for item in list_items:
     lst_laksyt.insert("end", item)
-btn_scrollup =ttk.Button(frm_main, text="^",command=lambda:lst_laksyt.yview_scroll(-1,"units"))
-btn_scrolldown =ttk.Button(frm_main, text="ˇ",command=lambda:lst_laksyt.yview_scroll(1,"units"))
+img_arrowUp = tk.PhotoImage(file="pictures/arrowUp.png")
+btn_scrollup = tk.Button(frm_main, image=img_arrowUp, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(-1,"units"))
+img_arrowDown = tk.PhotoImage(file="pictures/arrowDown.png")
+btn_scrolldown =tk.Button(frm_main, image=img_arrowDown, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(1,"units"))
 lst_laksyt.bind("<Button-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
@@ -111,16 +114,16 @@ frm_buttons.columnconfigure(0, weight=1)
 frm_buttons.columnconfigure(1, weight=1)
 frm_buttons.columnconfigure(2, weight=1)
 img_mail= tk.PhotoImage(file="pictures/mail.png")
-btn_mail= tk.Button(frm_buttons,image=img_mail,highlightthickness = 0, bd = 0)
+btn_mail= tk.Button(frm_buttons, image=img_mail, highlightthickness = 0, bd = 0)
 img_schedule =tk.PhotoImage(file="pictures/schedule.png")
-btn_schedule= tk.Button(frm_buttons,image=img_schedule,highlightthickness = 0, bd = 0)
+btn_schedule= tk.Button(frm_buttons, image=img_schedule, highlightthickness = 0, bd = 0)
 img_note =tk.PhotoImage(file="pictures/note.png")
-btn_note= tk.Button(frm_buttons,image=img_note,highlightthickness = 0, bd = 0)
+btn_note= tk.Button(frm_buttons, image=img_note, highlightthickness = 0, bd = 0)
 
 lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
 lbl_laksyt.grid(row=2,column=0,sticky="SW")
-lst_laksyt.grid(row=3,column=0,ipadx=20)
+lst_laksyt.grid(row=3,column=0)
 btn_scrollup.grid(row=3,column=1,sticky="N")
 btn_scrolldown.grid(row=3,column=1,sticky="S")
 
