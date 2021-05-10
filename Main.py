@@ -7,7 +7,7 @@ password = "salasana"
 def loginToGreeting():
     email = ent_email.get()
     password = ent_pw.get()
-    if email == "Oppilas@email.com" and password == "asd":
+    if email == "a" and password == "a":
         lbl_error.grid_forget()
         frm_login.pack_forget()
         labelChange(email)
@@ -124,7 +124,6 @@ img_schedule =tk.PhotoImage(file="pictures/schedule.png")
 btn_schedule= tk.Button(frm_buttons, image=img_schedule, highlightthickness = 0, bd = 0)
 img_note =tk.PhotoImage(file="pictures/note.png")
 btn_note= tk.Button(frm_buttons, image=img_note, highlightthickness = 0, bd = 0)
-
 lbl_name.grid(row=0, column=0, sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1, sticky="NSEW", pady=20)
 lbl_laksyt.grid(row=2, column=0, sticky="SW")
@@ -141,8 +140,8 @@ btn_note.grid(row=0,column=2, sticky="E")
 
 def changeButton():
     btn_palautus.grid_forget()
-    btn_file.grid(row=5,column=0, sticky="W")
-    btn_camera.grid(row=5,column=0, sticky="E")
+    btn_file.grid(row=5,column=0)
+    btn_camera.grid(row=5,column=0,sticky="E")
 
 def openFile():
     filename = filedialog.askopenfilename()
@@ -152,28 +151,34 @@ def openFile():
 
     
 frm_homework = ttk.Frame(root)
-lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=30)
-btn_profile = ttk.Button(frm_homework, text="Profile",command=homeworkToProfile)
-lbl_ainelaksyt = ttk.Label(frm_homework, text="LÄKSYT\nAINE", font=30)
-txt_ainelaksyt = tk.Text(frm_homework,width=25)
-btn_scrollup =ttk.Button(frm_homework, text="^",command=lambda:txt_ainelaksyt.yview_scroll(-1,"units"))
-btn_scrolldown =ttk.Button(frm_homework, text="ˇ",command=lambda:txt_ainelaksyt.yview_scroll(1,"units"))
-lbl_palautus = ttk.Label(frm_homework,text="Palauta viim. 1.4", font=30)
-btn_palautus = ttk.Button(frm_homework, text="palautus", command=changeButton)
-btn_file = ttk.Button (frm_homework, text="file",command=openFile)
-btn_camera = ttk.Button (frm_homework, text="camera")
-lbl_palautettu = ttk.Label(frm_homework,text = "✓ palautettu",background="green",font=30)
-btn_returnToMain = ttk.Button(frm_homework,text= "back", command=homeworkToMain)
+lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=('Lato', 25))
+btn_profile = tk.Button(frm_homework,image=img_profile, highlightthickness=0, bd=0,command=homeworkToProfile)
+lbl_ainelaksyt = ttk.Label(frm_homework, text="Läksyt", font=('Lato', 25))
+txt_ainelaksyt = tk.Text(frm_homework,height=9, width=12, font=('Lato', 20),bd=2,relief=tk.SOLID)
+txt_ainelaksyt.insert("end","asd")
+txt_ainelaksyt.configure(state="disabled")
+btn_scrollup = tk.Button(frm_homework, image=img_arrowUp, highlightthickness=0, bd=0,command=lambda:txt_ainelaksyt.yview_scroll(-1,"units"))
+btn_scrolldown =tk.Button(frm_homework, image=img_arrowDown, highlightthickness=0, bd=0,command=lambda:txt_ainelaksyt.yview_scroll(1,"units"))
+lbl_palautus = ttk.Label(frm_homework,text="Palauta viim. 1.4", font=('Lato', 20))
+img_palautus= tk.PhotoImage(file="pictures/download.png")
+btn_palautus = tk.Button(frm_homework, image=img_palautus, highlightthickness = 0, bd = 0, command=changeButton)
+img_file=tk.PhotoImage(file="pictures/file.png")
+btn_file = tk.Button (frm_homework, image=img_file,command=openFile)
+img_camera=tk.PhotoImage(file="pictures/camera.png")
+btn_camera = ttk.Button (frm_homework, image=img_camera)
+lbl_palautettu = ttk.Label(frm_homework,text = "✓ palautettu",background="green",font=('Lato', 20))
+img_back=tk.PhotoImage(file="pictures/back.png")
+btn_returnToMain = tk.Button(frm_homework,image=img_back,command=homeworkToMain)
 
 lbl_nameHomework.grid(row=0,column=0,sticky="NW", pady=20)
-btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
-lbl_laksyt.grid(row=2,column=0,sticky="SW")
-txt_ainelaksyt.grid(row=3,column=0,ipadx=20)
-btn_scrollup.grid(row=3,column=1,sticky="N")
-btn_scrolldown.grid(row=3,column=1,sticky="S")
+btn_profile.grid(row=0, column=1,sticky="NSEW", pady=20)
+lbl_ainelaksyt.grid(row=1,column=0,sticky="SW")
+txt_ainelaksyt.grid(row=2,column=0,ipadx=20)
+btn_scrollup.grid(row=2, column=1, sticky="NW", padx=5)
+btn_scrolldown.grid(row=2, column=1, sticky="SW", padx=5)
 lbl_palautus.grid(row=4) 
 btn_palautus.grid(row=5)
-btn_returnToMain.grid(row=6,sticky="SW")
+btn_returnToMain.grid(row=6,sticky="SW",pady=20)
 
 
 ## Profile Page
