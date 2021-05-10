@@ -7,7 +7,7 @@ password = "salasana"
 def loginToGreeting():
     email = ent_email.get()
     password = ent_pw.get()
-    if email == "A" and password == "A":
+    if email == "Oppilas@email.com" and password == "asd":
         lbl_error.grid_forget()
         frm_login.pack_forget()
         labelChange(email)
@@ -43,6 +43,10 @@ def profileToMain():
     frm_profile.pack_forget()
     frm_main.pack()
 
+def profileToLogin():
+    frm_profile.pack_forget()
+    frm_login.pack()
+
 def labelChange(studentName):
     lbl_speachBubble.configure(text="Hei " + studentName.split('@')[0] + "!")
     lbl_name.configure(text=studentName.split('@')[0] + "\nKoulu")
@@ -57,33 +61,34 @@ root.wm_geometry("360x640")
 
 #Login frame
 frm_login = ttk.Frame(root)
-lbl_cat = ttk.Label(frm_login, text="😺", font=("Courier",200))
-lbl_email = ttk.Label(frm_login, text="Sähköposti")
-ent_email = ttk.Entry(frm_login, textvariable=email, width=30)
-frm_empty = ttk.Frame(frm_login, height=20)
-lbl_pw = ttk.Label(frm_login, text="Salasana")
-ent_pw = ttk.Entry(frm_login, textvariable=password, show="*", width=30)
-btn_ok = ttk.Button(frm_login, width=10, text="Ok", command=loginToGreeting)
-lbl_error = ttk.Label(frm_login, text="Sähköposti tai salasana on väärin.", foreground="red")
+frm_login.columnconfigure(0, weight=1)
+lbl_cat = tk.Label(frm_login, text="😺", font=("Courier", 200))
+lbl_email = ttk.Label(frm_login, text="Sähköposti", font=('Lato', 15))
+ent_email = ttk.Entry(frm_login, font=('Lato', 15), textvariable=email, width=50)
+frm_empty = ttk.Frame(frm_login, height=25)
+lbl_pw = ttk.Label(frm_login, text="Salasana", font=('Lato', 15))
+ent_pw = ttk.Entry(frm_login, font=('Lato', 15), textvariable=password, show="*", width=50)
+btn_ok = ttk.Button(frm_login, width=8, text="Ok", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=loginToGreeting)
+lbl_error = ttk.Label(frm_login, text="Sähköposti tai salasana on väärin.", font=('Lato', 10), foreground="red")
 
-lbl_cat.grid(row=0, column=0)
-lbl_email.grid(row=1, column=0, padx=50, sticky="w")
-ent_email.grid(row=2, column=0)
+lbl_cat.grid(row=0, column=0, sticky="ew")
+lbl_email.grid(row=1, column=0, sticky="w", padx=40)
+ent_email.grid(row=2, column=0, padx=40)
 frm_empty.grid(row=3, column=0)
-lbl_pw.grid(row=4, column=0, padx=50, sticky="w")
-ent_pw.grid(row=5, column=0)
-btn_ok.grid(row=6, column=0, pady=20)
+lbl_pw.grid(row=4, column=0, sticky="w", padx=40)
+ent_pw.grid(row=5, column=0, padx=40)
+btn_ok.grid(row=6, column=0, pady=30)
 
 #Greeting frame
 frm_greeting = ttk.Frame(root)
 img_speachBubble = tk.PhotoImage(file="pictures/speachBubble.png")
-lbl_speachBubble = ttk.Label(frm_greeting, text=email, font=25, image=img_speachBubble, compound='center')
+lbl_speachBubble = ttk.Label(frm_greeting, text=email, font=('Lato', 15), image=img_speachBubble, compound='center')
 lbl_cat = ttk.Label(frm_greeting, text="😺", font=("Courier",200))
-lbl_greeting = ttk.Label(frm_greeting, text="Sinulla on 0 uutta läksyä")
+lbl_greeting = ttk.Label(frm_greeting, text="Sinulla on 27 uutta läksyä", font=('Lato', 15))
 
 frm_buttons = ttk.Frame(frm_greeting)
-btn_back = ttk.Button(frm_buttons, width=10, text="Takaisin", command=greetingToLogin)
-btn_ok = ttk.Button(frm_buttons, width=10, text="Ok", command=greetingToMain)
+btn_back = ttk.Button(frm_buttons, width=8, text="Takaisin", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToLogin)
+btn_ok = ttk.Button(frm_buttons, width=8, text="Ok", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToMain)
 
 lbl_speachBubble.grid(row=0, column=0)
 lbl_cat.grid(row=1, column=0)
@@ -95,11 +100,11 @@ btn_ok.grid(row=0, column=1, padx=5)
 
 #Start page
 frm_main = ttk.Frame(root)
-lbl_name = ttk.Label(frm_main,text="Nimi\nKoulu", font=('Tahoma', 25))
+lbl_name = ttk.Label(frm_main,text="Nimi\nKoulu", font=('Lato', 25))
 img_profile = tk.PhotoImage(file="pictures/profile.png")
 btn_profile = tk.Button(frm_main, image=img_profile, highlightthickness=0, bd=0, command=mainToProfile)
-lbl_laksyt = ttk.Label(frm_main, text="LÄKSYT", font=('Tahoma', 25))
-lst_laksyt = tk.Listbox(frm_main, height=8, width=16, font=('Tahoma', 20))
+lbl_laksyt = ttk.Label(frm_main, text="Läksyt", font=('Lato', 25))
+lst_laksyt = tk.Listbox(frm_main, height=9, width=15, font=('Lato', 20), relief=tk.SOLID, bd=2)
 list_items = ["Matematiikka 1","Matematiikka 2","Matematiikka 3","Englanti 1","Englanti 2","Historia 1","Historia 2","Äidinkieli 1","Äidinkieli 2","Äidinkieli 3","Äidinkieli 4","Kuvataide 1","Kuvataide 2","Uskonto 1","Uskonto 2","Maantieto 1","Maantieto 2","Biologia 1","Biologia 2","Fysiikka 1","Fysiikka 2","Kemia 1","Kemia 2","Ruotsi 1","Ruotsi 2","Ruotsi 3","Liikunta 1"]
 for item in list_items:
     lst_laksyt.insert("end", item)
@@ -120,16 +125,16 @@ btn_schedule= tk.Button(frm_buttons, image=img_schedule, highlightthickness = 0,
 img_note =tk.PhotoImage(file="pictures/note.png")
 btn_note= tk.Button(frm_buttons, image=img_note, highlightthickness = 0, bd = 0)
 
-lbl_name.grid(row=0,column=0,sticky="NW", pady=20)
-btn_profile.grid(row=0, column=1,sticky="NE", pady=20)
-lbl_laksyt.grid(row=2,column=0,sticky="SW")
-lst_laksyt.grid(row=3,column=0)
-btn_scrollup.grid(row=3,column=1,sticky="N")
-btn_scrolldown.grid(row=3,column=1,sticky="S")
+lbl_name.grid(row=0, column=0, sticky="NW", pady=20)
+btn_profile.grid(row=0, column=1, sticky="NSEW", pady=20)
+lbl_laksyt.grid(row=2, column=0, sticky="SW")
+lst_laksyt.grid(row=3, column=0)
+btn_scrollup.grid(row=3, column=1, sticky="NW", padx=5)
+btn_scrolldown.grid(row=3, column=1, sticky="SW", padx=5)
 
-frm_buttons.grid(row=4, column=0, columnspan=2, pady=25, sticky="EW")
-btn_mail.grid(row=0,column=0, sticky="W")
-btn_schedule.grid(row=0,column=1)
+frm_buttons.grid(row=4, column=0, columnspan=2, pady=35, sticky="EW")
+btn_mail.grid(row=0, column=0, sticky="W")
+btn_schedule.grid(row=0, column=1)
 btn_note.grid(row=0,column=2, sticky="E")
 
 ## Homework Page
@@ -180,7 +185,7 @@ lbl_tiedot = ttk.Label(frm_profile,text="Opettaja\nPuhelinnumero\nHuoltaja", fon
 btn_kuva = ttk.Button(frm_profile,image=img_schedule)
 btn_sposti = ttk.Button(frm_profile,text="Sposti")
 btn_salasana = ttk.Button(frm_profile,text="Vaihda salasana")
-btn_uloskirjautuminen = ttk.Button(frm_profile,text="Kirjaudu ulos")
+btn_uloskirjautuminen = ttk.Button(frm_profile, text="Kirjaudu ulos", command=profileToLogin)
 img_settings = tk.PhotoImage(file="pictures/setting.png")
 btn_asetukset = ttk.Button(frm_profile,image=img_settings)
 btn_returnToMain = ttk.Button(frm_profile,text="Back", command=profileToMain)
