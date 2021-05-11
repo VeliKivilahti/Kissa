@@ -10,7 +10,7 @@ palautetut = []
 def loginToGreeting(): 
     email = ent_email.get()
     password = ent_pw.get()
-    if email == "Oppilas" and password == "salasana":
+    if email == "oppilas@email.com" and password == "salasana":
         lbl_error.grid_forget()
         frm_login.pack_forget()
         labelChange(email)
