@@ -43,12 +43,14 @@ def mainToProfile():
 
 def homeworkToProfile():
     lbl_palautettu.grid_forget() #Resets the view back to original
+    frm_palautusPopUp.grid_forget()
     btn_palautus.grid(row=5)
     frm_homework.pack_forget()
     frm_profile.pack()
 
 def homeworkToMain():
     lbl_palautettu.grid_forget() #Resets the view back to original
+    frm_palautusPopUp.grid_forget()
     btn_palautus.grid(row=5)
     frm_homework.pack_forget()
     frm_main.pack()
@@ -97,6 +99,7 @@ btn_ok.grid(row=6, column=0, pady=30)
 
 #Greeting frame
 frm_greeting = ttk.Frame(root)
+frm_empty = ttk.Frame(frm_greeting, height=40)
 img_speachBubble = tk.PhotoImage(file="pictures/speachBubble.png")
 lbl_speachBubble = ttk.Label(frm_greeting, text=email, font=('Lato', 15), image=img_speachBubble, compound='center')
 lbl_cat = ttk.Label(frm_greeting, text="😺", font=("Courier",200))
@@ -105,10 +108,11 @@ frm_buttons = ttk.Frame(frm_greeting)
 btn_back = ttk.Button(frm_buttons, width=8, text="Takaisin", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToLogin)
 btn_ok = ttk.Button(frm_buttons, width=8, text="Ok", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToMain)
 
-lbl_speachBubble.grid(row=0, column=0)
-lbl_cat.grid(row=1, column=0)
-lbl_greeting.grid(row=2, column=0)
-frm_buttons.grid(row=3, column=0, pady=20)
+frm_empty.grid(row=0)
+lbl_speachBubble.grid(row=1, column=0)
+lbl_cat.grid(row=2, column=0)
+lbl_greeting.grid(row=3, column=0)
+frm_buttons.grid(row=4, column=0, pady=20)
 btn_back.grid(row=0, column=0, padx=5)
 btn_ok.grid(row=0, column=1, padx=5)
 
@@ -157,21 +161,27 @@ btn_note.grid(row=0,column=2, sticky="E")
 
 def changeButton():
     btn_palautus.grid_forget()
-    btn_file.grid(row=5,column=0)
-    btn_camera.grid(row=5,column=0,sticky="E")
+    frm_palautusPopUp.grid(row=5, sticky="WE", )
+    btn_file.grid(row=0,column=0, sticky="SNW", padx=2, pady=2)
+    btn_camera.grid(row=0,column=1, sticky="SNEW", padx=2, pady=2)
+    btn_cancel.grid(row=0, column=2, sticky="SNE", padx=2, pady=2)
 
 def openFile():
     filename = filedialog.askopenfilename()
     if filename: # when cancel, it will be ""
         File = filename
         file_only = File.split('/')[-1]
+        frm_palautusPopUp.grid_forget()
         btn_file.grid_forget()
         btn_camera.grid_forget()
+        btn_cancel.grid_forget()
         lbl_palautettu.grid(row=5,sticky="NSWE")
         palautetut.append(lbl_ainelaksyt.cget("text")) ## Marks the homework as done
-            
 
- 
+def cancel():
+    frm_palautusPopUp.grid_forget()
+    btn_palautus.grid(row=5)
+
 frm_homework = ttk.Frame(root)
 lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=('Lato', 25))
 btn_profile = tk.Button(frm_homework,image=img_profile, highlightthickness=0, bd=0,command=homeworkToProfile)
@@ -184,14 +194,17 @@ btn_scrolldown =tk.Button(frm_homework, image=img_arrowDown, highlightthickness=
 lbl_palautus = ttk.Label(frm_homework,text="Palauta viim. 1.4", font=('Lato', 18))
 img_palautus= tk.PhotoImage(file="pictures/download.png")
 btn_palautus = tk.Button(frm_homework, image=img_palautus, highlightthickness = 0, bd = 0, command=changeButton)
+frm_palautusPopUp = tk.Frame(frm_homework, background="white", relief=tk.SOLID, bd=1.5)
+frm_palautusPopUp.columnconfigure([0, 1, 2], weight=1)
 img_file=tk.PhotoImage(file="pictures/file.png")
-btn_file = tk.Button (frm_homework, image=img_file,command=openFile)
+btn_file = tk.Button (frm_palautusPopUp, image=img_file, background="white", highlightthickness = 0, bd = 0, command=openFile)
 img_camera=tk.PhotoImage(file="pictures/camera.png")
-btn_camera = ttk.Button (frm_homework, image=img_camera)
-lbl_palautettu = ttk.Label(frm_homework,text = "✓ palautettu",background="green",font=('Lato', 20))
+btn_camera = tk.Button(frm_palautusPopUp, background="white", highlightthickness = 0, bd = 0, image=img_camera)
+img_cancel = tk.PhotoImage(file="pictures/cancel.png")
+btn_cancel = tk.Button(frm_palautusPopUp, image=img_cancel, background="white", highlightthickness = 0, bd = 0, command=cancel)
+lbl_palautettu = tk.Label(frm_homework,text = "✓ Palautettu", background="green", font=('Lato', 20), relief=tk.SOLID, bd=1.5)
 img_back=tk.PhotoImage(file="pictures/back.png")
 btn_returnToMain = tk.Button(frm_homework, image=img_back, highlightthickness = 0, bd = 0, command=homeworkToMain)
-
 lbl_nameHomework.grid(row=0,column=0,sticky="NW", pady=20)
 btn_profile.grid(row=0, column=1,sticky="NSEW", pady=20)
 lbl_ainelaksyt.grid(row=1,column=0,sticky="SW")
