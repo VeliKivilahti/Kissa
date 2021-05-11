@@ -1,7 +1,9 @@
 # Koulu appi
 
-Ohjelmointi 4 harjoituystyön toteutusosa
+Ohjelmointi 4 harjoitustyön toteutusosa
+
 Suunnittelijat: Essi Kinnusen ja Aino Reinikaisen
+
 Toteutus: Veli Kivilahti ja Tuomas Mattila
 
 Ohjelma on toteutettu pythonilla käyttäen Tkinteriä. Toteutuksessa priorisoitiin opettajien antamien ohjeiden mukaisesti aloitusnäkymää, tervehdysnäkymää ja päävalikkoa.
