@@ -24,7 +24,10 @@ def greetingToMain():
     frm_greeting.pack_forget()
     frm_main.pack()
 
-def mainToHomework(*args):
+def mainToHomework(event):
+    value=str(lst_laksyt.get(lst_laksyt.curselection()))
+    print (value)
+    lbl_ainelaksyt.configure(text=value)
     frm_main.pack_forget()
     frm_homework.pack()
 
@@ -88,7 +91,6 @@ img_speachBubble = tk.PhotoImage(file="pictures/speachBubble.png")
 lbl_speachBubble = ttk.Label(frm_greeting, text=email, font=('Lato', 15), image=img_speachBubble, compound='center')
 lbl_cat = ttk.Label(frm_greeting, text="😺", font=("Courier",200))
 lbl_greeting = ttk.Label(frm_greeting, text="Sinulla on 27 uutta läksyä", font=('Lato', 15))
-
 frm_buttons = ttk.Frame(frm_greeting)
 btn_back = ttk.Button(frm_buttons, width=8, text="Takaisin", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToLogin)
 btn_ok = ttk.Button(frm_buttons, width=8, text="Ok", style=ttk.Style().configure('TButton', font=('Lato', 15)), command=greetingToMain)
@@ -96,7 +98,6 @@ btn_ok = ttk.Button(frm_buttons, width=8, text="Ok", style=ttk.Style().configure
 lbl_speachBubble.grid(row=0, column=0)
 lbl_cat.grid(row=1, column=0)
 lbl_greeting.grid(row=2, column=0)
-
 frm_buttons.grid(row=3, column=0, pady=20)
 btn_back.grid(row=0, column=0, padx=5)
 btn_ok.grid(row=0, column=1, padx=5)
@@ -116,7 +117,7 @@ img_arrowUp = tk.PhotoImage(file="pictures/arrowUp.png")
 btn_scrollup = tk.Button(frm_main, image=img_arrowUp, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 img_arrowDown = tk.PhotoImage(file="pictures/arrowDown.png")
 btn_scrolldown =tk.Button(frm_main, image=img_arrowDown, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(1,"units"))
-lst_laksyt.bind("<Button-1>", mainToHomework)
+lst_laksyt.bind("<ButtonRelease-1>", mainToHomework)
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
@@ -153,7 +154,7 @@ def openFile():
     filename = filedialog.askopenfilename()
     btn_file.grid_forget()
     btn_camera.grid_forget()
-    lbl_palautettu.grid(row=5)
+    lbl_palautettu.grid(row=5,sticky="NSWE")
  
 frm_homework = ttk.Frame(root)
 lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=('Lato', 25))
