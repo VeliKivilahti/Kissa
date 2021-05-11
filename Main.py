@@ -5,7 +5,7 @@ email = "sahkoposti"
 password = "salasana"
 palautetut = []
 
-def loginToGreeting():
+def loginToGreeting(): 
     email = ent_email.get()
     password = ent_pw.get()
     if email == "a" and password == "a":
@@ -29,7 +29,7 @@ def mainToHomework(event):
     lbl_ainelaksyt.configure(text=currentHomework)
     frm_main.pack_forget()
     frm_homework.pack()
-    if (currentHomework in palautetut):
+    if (currentHomework in palautetut):## Inserts "Palautettu" if homework already is returned 
         btn_palautus.grid_forget()
         lbl_palautettu.grid(row=5,sticky="NSWE")
     
@@ -61,7 +61,7 @@ def profileToLogin():
     frm_profile.pack_forget()
     frm_login.pack()
 
-def labelChange(studentName):
+def labelChange(studentName): # Changes labels to have student's name in the different pages
     lbl_speachBubble.configure(text="Hei " + studentName.split('@')[0] + "!")
     lbl_name.configure(text=studentName.split('@')[0] + "\nKoulu")
     lbl_nameHomework.configure(text=studentName.split('@')[0] + "\nKoulu")
@@ -124,12 +124,12 @@ lbl_laksyt = ttk.Label(frm_main, text="Läksyt", font=('Lato', 25))
 lst_laksyt = tk.Listbox(frm_main, height=9, width=15, font=('Lato', 20), relief=tk.SOLID, bd=1.5)
 list_items = ["Matematiikka 1","Matematiikka 2","Matematiikka 3","Englanti 1","Englanti 2","Historia 1","Historia 2","Äidinkieli 1","Äidinkieli 2","Äidinkieli 3","Äidinkieli 4","Kuvataide 1","Kuvataide 2","Uskonto 1","Uskonto 2","Maantieto 1","Maantieto 2","Biologia 1","Biologia 2","Fysiikka 1","Fysiikka 2","Kemia 1","Kemia 2","Ruotsi 1","Ruotsi 2","Ruotsi 3","Liikunta 1"]
 for item in list_items:
-    lst_laksyt.insert("end", item)
+    lst_laksyt.insert("end", item) # Initialize an list of homeworks
 img_arrowUp = tk.PhotoImage(file="pictures/arrowUp.png")
 btn_scrollup = tk.Button(frm_main, image=img_arrowUp, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(-1,"units"))
 img_arrowDown = tk.PhotoImage(file="pictures/arrowDown.png")
 btn_scrolldown =tk.Button(frm_main, image=img_arrowDown, highlightthickness=0, bd=0, command=lambda:lst_laksyt.yview_scroll(1,"units"))
-lst_laksyt.bind("<ButtonRelease-1>", mainToHomework)
+lst_laksyt.bind("<ButtonRelease-1>", mainToHomework) # Clicking the list of homework goes to invidiual homework page
 
 frm_buttons = ttk.Frame(frm_main)
 frm_buttons.columnconfigure(0, weight=1)
@@ -156,19 +156,17 @@ btn_note.grid(row=0,column=2, sticky="E")
 
 
 ## Homework Page
-
-def changeButton():
+ 
+def changeButton(): # Changes return button to have buttons for file return, camera and return
     btn_palautus.grid_forget()
     frm_palautusPopUp.grid(row=5, sticky="WE", )
     btn_file.grid(row=0,column=0, sticky="SNW", padx=2, pady=2)
     btn_camera.grid(row=0,column=1, sticky="SNEW", padx=2, pady=2)
     btn_cancel.grid(row=0, column=2, sticky="SNE", padx=2, pady=2)
 
-def openFile():
+def openFile(): ## Opens a file and marks the homework as done if file has been selected
     filename = filedialog.askopenfilename()
     if filename: # when cancel, it will be ""
-        File = filename
-        file_only = File.split('/')[-1]
         frm_palautusPopUp.grid_forget()
         btn_file.grid_forget()
         btn_camera.grid_forget()
@@ -176,7 +174,7 @@ def openFile():
         lbl_palautettu.grid(row=5,sticky="NSWE")
         palautetut.append(lbl_ainelaksyt.cget("text")) ## Marks the homework as done
 
-def cancel():
+def cancel(): ## Cancels the homework
     frm_palautusPopUp.grid_forget()
     btn_palautus.grid(row=5)
 
