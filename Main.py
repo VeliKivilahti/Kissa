@@ -1,14 +1,16 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
+
 email = "sahkoposti"
 password = "salasana"
 palautetut = []
 
+#Navigation functions
 def loginToGreeting(): 
     email = ent_email.get()
     password = ent_pw.get()
-    if email == "a" and password == "a":
+    if email == "Oppilas" and password == "salasana":
         lbl_error.grid_forget()
         frm_login.pack_forget()
         labelChange(email)
@@ -130,9 +132,7 @@ btn_scrolldown =tk.Button(frm_main, image=img_arrowDown, highlightthickness=0, b
 lst_laksyt.bind("<ButtonRelease-1>", mainToHomework) # Clicking the list of homework goes to invidiual homework page
 
 frm_buttons = ttk.Frame(frm_main)
-frm_buttons.columnconfigure(0, weight=1)
-frm_buttons.columnconfigure(1, weight=1)
-frm_buttons.columnconfigure(2, weight=1)
+frm_buttons.columnconfigure([0, 1, 2], weight=1)
 img_mail= tk.PhotoImage(file="pictures/mail.png")
 btn_mail= tk.Button(frm_buttons, image=img_mail, highlightthickness = 0, bd = 0)
 img_schedule =tk.PhotoImage(file="pictures/schedule.png")
@@ -150,16 +150,15 @@ btn_scrolldown.grid(row=3, column=1, sticky="SW", padx=5)
 frm_buttons.grid(row=4, column=0, columnspan=2, pady=35, sticky="EW")
 btn_mail.grid(row=0, column=0, sticky="W")
 btn_schedule.grid(row=0, column=1)
-btn_note.grid(row=0,column=2, sticky="E")
+btn_note.grid(row=0, column=2, sticky="E")
 
 
 ## Homework Page
- 
 def changeButton(): # Changes return button to have buttons for file return, camera and return
     btn_palautus.grid_forget()
     frm_palautusPopUp.grid(row=5, sticky="WE", )
-    btn_file.grid(row=0,column=0, sticky="SNW", padx=2, pady=2)
-    btn_camera.grid(row=0,column=1, sticky="SNEW", padx=2, pady=2)
+    btn_file.grid(row=0, column=0, sticky="SNW", padx=2, pady=2)
+    btn_camera.grid(row=0, column=1, sticky="SNEW", padx=2, pady=2)
     btn_cancel.grid(row=0, column=2, sticky="SNE", padx=2, pady=2)
 
 def openFile(): ## Opens a file and marks the homework as done if file has been selected
@@ -169,7 +168,7 @@ def openFile(): ## Opens a file and marks the homework as done if file has been 
         btn_file.grid_forget()
         btn_camera.grid_forget()
         btn_cancel.grid_forget()
-        lbl_palautettu.grid(row=5,sticky="NSWE")
+        lbl_palautettu.grid(row=5, sticky="NSWE")
         palautetut.append(lbl_ainelaksyt.cget("text")) ## Marks the homework as done
 
 def cancel(): ## Cancels the homework
@@ -180,12 +179,12 @@ frm_homework = ttk.Frame(root)
 lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=('Lato', 25))
 btn_profile = tk.Button(frm_homework,image=img_profile, highlightthickness=0, bd=0,command=homeworkToProfile)
 lbl_ainelaksyt = ttk.Label(frm_homework, text="Läksyt", font=('Lato', 25))
-txt_ainelaksyt = tk.Text(frm_homework,height=9, width=15, font=('Lato', 15), bd=1.5, relief=tk.SOLID)
-txt_ainelaksyt.insert("end","Tämä on tehtävänanto oppilaalle.")
+txt_ainelaksyt = tk.Text(frm_homework, height=9, width=15, font=('Lato', 15), bd=1.5, relief=tk.SOLID)
+txt_ainelaksyt.insert("end", "Tämä on tehtävänanto oppilaalle.")
 txt_ainelaksyt.configure(state="disabled")
 btn_scrollup = tk.Button(frm_homework, image=img_arrowUp, highlightthickness=0, bd=0,command=lambda:txt_ainelaksyt.yview_scroll(-1,"units"))
 btn_scrolldown =tk.Button(frm_homework, image=img_arrowDown, highlightthickness=0, bd=0,command=lambda:txt_ainelaksyt.yview_scroll(1,"units"))
-lbl_palautus = ttk.Label(frm_homework,text="Palauta viim. 1.4", font=('Lato', 18))
+lbl_palautus = ttk.Label(frm_homework, text="Palauta viim. 1.4", font=('Lato', 18))
 img_palautus= tk.PhotoImage(file="pictures/download.png")
 btn_palautus = tk.Button(frm_homework, image=img_palautus, background="white", highlightthickness = 0, relief=tk.SOLID, bd = 1.5, command=changeButton)
 frm_palautusPopUp = tk.Frame(frm_homework, background="white", relief=tk.SOLID, bd=1.5)
@@ -199,16 +198,15 @@ btn_cancel = tk.Button(frm_palautusPopUp, image=img_cancel, background="white", 
 lbl_palautettu = tk.Label(frm_homework, text = "✓ Palautettu", background="green", font=('Lato', 20), relief=tk.SOLID, bd=1.5)
 img_back=tk.PhotoImage(file="pictures/back.png")
 btn_returnToMain = tk.Button(frm_homework, image=img_back, highlightthickness = 0, bd = 0, command=homeworkToMain)
-lbl_nameHomework.grid(row=0,column=0,sticky="NW", pady=20)
-btn_profile.grid(row=0, column=1,sticky="NSEW", pady=20)
-lbl_ainelaksyt.grid(row=1,column=0,sticky="SW")
-txt_ainelaksyt.grid(row=2,column=0,ipadx=20)
+lbl_nameHomework.grid(row=0, column=0, sticky="NW", pady=20)
+btn_profile.grid(row=0, column=1, sticky="NSEW", pady=20)
+lbl_ainelaksyt.grid(row=1, column=0, sticky="SW")
+txt_ainelaksyt.grid(row=2, column=0, ipadx=20)
 btn_scrollup.grid(row=2, column=1, sticky="NW", padx=5)
 btn_scrolldown.grid(row=2, column=1, sticky="SW", padx=5)
 lbl_palautus.grid(row=4, sticky="W") 
 btn_palautus.grid(row=5, sticky="WE")
-btn_returnToMain.grid(row=6,sticky="SW",pady=30)
-
+btn_returnToMain.grid(row=6, sticky="SW", pady=30)
 
 
 ## Profile Page
@@ -241,7 +239,7 @@ lbl_tiedot.grid(row=4, column=0, sticky="W", columnspan=2)
 btn_asetukset.grid(row=5, column=0, sticky="SNEW", columnspan=2, pady=40)
 btn_returnToMain.grid(row=6, sticky="W")
 
+
 # Pack the Login page and start
 frm_login.pack()
-
 root.mainloop()
