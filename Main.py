@@ -1,9 +1,9 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from tkinter.messagebox import showinfo
 from tkinter import filedialog
 email = "sahkoposti"
 password = "salasana"
+palautetut = []
 
 def loginToGreeting():
     email = ent_email.get()
@@ -25,21 +25,31 @@ def greetingToMain():
     frm_main.pack()
 
 def mainToHomework(event):
-    value=str(lst_laksyt.get(lst_laksyt.curselection()))
-    print (value)
-    lbl_ainelaksyt.configure(text=value)
+    currentHomework = str(lst_laksyt.get(lst_laksyt.curselection()))
+    lbl_ainelaksyt.configure(text=currentHomework)
     frm_main.pack_forget()
     frm_homework.pack()
+    if (currentHomework in palautetut):
+        btn_palautus.grid_forget()
+        lbl_palautettu.grid(row=5,sticky="NSWE")
+    print (currentHomework)
+    print (palautetut)
+    
+        
 
 def mainToProfile():
     frm_main.pack_forget()
     frm_profile.pack()
 
 def homeworkToProfile():
+    lbl_palautettu.grid_forget() #Resets the view back to original
+    btn_palautus.grid(row=5)
     frm_homework.pack_forget()
     frm_profile.pack()
 
 def homeworkToMain():
+    lbl_palautettu.grid_forget() #Resets the view back to original
+    btn_palautus.grid(row=5)
     frm_homework.pack_forget()
     frm_main.pack()
 
@@ -152,9 +162,15 @@ def changeButton():
 
 def openFile():
     filename = filedialog.askopenfilename()
-    btn_file.grid_forget()
-    btn_camera.grid_forget()
-    lbl_palautettu.grid(row=5,sticky="NSWE")
+    if filename: # when cancel, it will be ""
+        File = filename
+        file_only = File.split('/')[-1]
+        btn_file.grid_forget()
+        btn_camera.grid_forget()
+        lbl_palautettu.grid(row=5,sticky="NSWE")
+        palautetut.append(lbl_ainelaksyt.cget("text")) ## Marks the homework as done
+            
+
  
 frm_homework = ttk.Frame(root)
 lbl_nameHomework = ttk.Label(frm_homework, text="Nimi\nKoulu", font=('Lato', 25))
@@ -185,6 +201,7 @@ btn_scrolldown.grid(row=2, column=1, sticky="SW", padx=5)
 lbl_palautus.grid(row=4, sticky="W") 
 btn_palautus.grid(row=5)
 btn_returnToMain.grid(row=6,sticky="SW",pady=30)
+
 
 
 ## Profile Page
