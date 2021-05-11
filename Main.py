@@ -32,8 +32,6 @@ def mainToHomework(event):
     if (currentHomework in palautetut):
         btn_palautus.grid_forget()
         lbl_palautettu.grid(row=5,sticky="NSWE")
-    print (currentHomework)
-    print (palautetut)
     
         
 
