@@ -26,4 +26,4 @@ Toteutetut asiat:
     - Paluu päävalikkoon vasemman alakulman nuolesta
     - Profiilinäkymään siirtyminen klikkaamalla oikean yläreunan profiilikuvaketta
 
-Button icons created at LogoMakr.com
+Button icons created at LogoMakr.com and flaticon.com
